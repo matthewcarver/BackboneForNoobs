@@ -1,1 +1,214 @@
-Backbone For Noobs
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Backbone.js walkthrough</title>
+
+    <meta name="description" content="A jQuery library for modern HTML presentations">
+    <meta name="author" content="Caleb Troughton">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+
+    <!-- Core and extension CSS files -->
+    <link rel="stylesheet" href="../slidedeck/core/deck.core.css">
+    <link rel="stylesheet" href="../slidedeck/extensions/goto/deck.goto.css">
+    <link rel="stylesheet" href="../slidedeck/extensions/menu/deck.menu.css">
+    <link rel="stylesheet" href="../slidedeck/extensions/navigation/deck.navigation.css">
+    <link rel="stylesheet" href="../slidedeck/extensions/status/deck.status.css">
+    <link rel="stylesheet" href="../slidedeck/extensions/hash/deck.hash.css">
+
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" href="../slidedeck/themes/style/swiss.css">
+
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" href="../slidedeck/themes/transition/horizontal-slide.css">
+
+    <script src="../slidedeck/modernizr.custom.js"></script>
+</head>
+
+<body class="deck-container">
+
+<!-- Begin slides -->
+<section class="slide" id="title-slide">
+    <h1>A Backbone.js Walk-Through for Noobs, by a Noob: a Recipe for Awesomesauce</h1>
+    <h3><i>*don't take this as gospel</i></h3>
+</section>
+
+<section class="slide" id="agenda">
+    <h2>If I stay awake, what will be covered?</h2>
+    <ol>
+        <li>
+            <h3>Why Backbone.js?</h3>
+            <p>What problem is Backbone.js trying to solve?</p>
+        </li>
+        <li>
+            <h3>Backbone.js, what are you made of?</h3>
+            <p>A quick overview of the major components of Backbone.js</p>
+        </li>
+        <li>
+            <h3>Let's see some code</h3>
+            <p>Starting from wireframe and building it out with Backbone.js</p>
+        </li>
+    </ol>
+</section>
+
+<section class="slide" id="why-backbone">
+    <h2>Why Backbone.js?  What is the problem?</h2>
+    <ul>
+        <li class="slide">
+            Modern web applications, <em>shockingly (sarcasm)</em> are becoming just that, first class applications that just happen to run in your web browser.
+        </li>
+        <li class="slide">
+            Using the old way of writing js to build complex applications will result in a big ball of spaghetti.  Javascript files thousands of lines long, multiple levels of nested functions where each function is
+            hundreds of lines long.
+            <ul style="height: 400px; width: 800px; list-style-type: none;">
+                <li style="float: left;"><img src="../slidedeck/images/SpaghettiCode.jpg"></li>
+                <li><img src="../slidedeck/images/BadGuiDesign.jpg"></li>
+            </ul>
+        </li>
+        <li class="slide">
+            This is a perfect candidate for using design principles like GoF and SOLID.  These patterns may be 30 years old, but they aren't any less applicable.
+            With judicious use of these principles we can build maintainable, complex web applications in javascript (look ma no higher level abstraction needed)
+        </li>
+        <li class="slide">
+            Using those principles we can build applications like <a href="http://www.documentcloud.org/public/search/">Document Cloud</a>, <a href="http://basecamphq.com/mobile">Basecamp Mobile</a>, 
+            <a href="http://www.groupon.com/now/austin">Groupon Now</a>, all the way to highly interactive games.
+        </li>
+    </ul>
+</section>
+
+<section class="slide" id="why-backbone2">
+    <h2>Why Backbone.js?  Why choose Backbone.js?</h2>
+    <ul>
+        <li class="slide">
+            Backbone.js roots are the same as those of all MV* frameworks, it is not strictly MVC (left) or MVP (right).
+            <ul style="height: 200px; width: 800px; list-style-type: none;">
+                <li style="float: left;"><img src="../slidedeck/images/mvc.png"></li>
+                <li><img src="../slidedeck/images/mvp.png"></li>
+            </ul>
+        </li>
+        <li class="slide">
+            It is best to think of Backbone.js as a MV* framework, while it shares the same roots of MVC/MVVM/MVP/MVWhatever and you can easily draw parallels (e.g., backbone view == presenter), 
+            trying to strictly apply these implementations when working with Backbone.js is not the best idea.
+        </li>
+        <li class="slide">
+            Backbone.js is a lightweight, flexible framework with an active community with a lot of good resources to learn the ins and outs.
+            <ul>
+                <li><a href="http://documentcloud.github.com/backbone/">On github</a></li>
+                <li>5.3kb packed and gziped</li>
+                <li>Only hard dependency is underscore.js</li>
+                <li>Documented well by the authors.</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+
+<section class="slide" id="backbone-components">
+    <h2>Backbone.js, what are you made of?</h2>
+    <ul>
+        <li class="slide">
+            <h3>Backbone.Model</h3>
+            <p>The model is where the data goes (obviously). It is also where we put conversions, validation, access control, computed properties.
+                The model can define the url where the resource is located on the server.  Model properties should be accessed with get() and set() functions, this is so that Backbone can propogate data change events.</p>
+        </li>
+        <li class="slide">
+            <h3>Backbone.View</h3>
+            <p>The view is the 'glue' component.  It glues a model to a DOM element on the page, glues events to functions, they don't define anything about the HTML or CSS that will be rendered on the page.
+            A single page can have multiple views bound to model changes and events, updating a part of the page independently without having to re-draw the entire page. *WARNING: terminology may be confusing*
+            the Backbone view can use any view/templating engine with the model to render html content.</p>
+        </li>
+        <li class="slide">
+            <h3>Backbone.Collection</h3>
+            <p>The collection is an ordered set of models.  Similar to the Backbone model, the collection can define where the resource is located on the server.
+                Events that occur on an item in the collection is also fired at the collection level.</p>
+        </li>
+        <li class="slide">
+            <h3>Backbone.Router</h3>
+            <p>The router is where we can link hash fragments to actions and events.  This allows a Backbone application to have linkable urls that can be bookmarked or shared.  
+                Some global and initialization of the actions/events can be placed in the router.</p>
+        </li>
+    </ul>
+</section>
+<section class="slide" id="backbone-components2">
+    <h2>Backbone.js, what are you made of?</h2>
+    <ul>
+        <li class="slide">
+            <h3>Backbone.Events</h3>
+            <p>Events is a module that can be used in any place to bind and trigger custom events.</p>
+        </li>
+        <li class="slide">
+            <h3>Backbone.History</h3>
+            <p>History keeps track of the Router hash changes, so that we don't break the internet, huzzah!</p>
+        </li>
+        <li class="slide">
+            <h3>Backbone.Sync</h3>
+            <p>This is the function that is called when Backbone attempts to read or save a model/collection from the server.  This can be overriden to use any persistence mechanism you need.</p>
+        </li>
+        <li class="slide">
+            <h3>Backbone.Utility</h3>
+            <p>A couple utility functions.</p>
+            <ul>
+                <li>noConflict can be used to embed a Backbone application on a page without clobbering the pages Backbone.</li>
+                <li>setDomLibrary tells Backbone to use a specific DOM/Ajax library.</li>
+            </ul>
+        </li>
+        <li class="slide">
+            <h3>For an up to date and more detailed explanation, as always go to the source.</h3>
+            <p><a href="http://documentcloud.github.com/backbone/#Utility">Backbone.js documentation</a></p>
+        </li>
+    </ul>
+</section>
+<section class="slide" id="demo1">
+    <h2>Let's see some code</h2>
+    <h3>What are we going to build?</h3>
+    <img src="..\slidedeck\images\mockup.png">
+</section>
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+    <span class="deck-status-current"></span>
+    -
+    <span class="deck-status-total"></span>
+</p>
+
+<!-- deck.goto snippet -->
+<form action="." method="get" class="goto-form">
+    <label for="goto-slide">Go to slide:</label>
+    <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+    <datalist id="goto-datalist"></datalist>
+    <input type="submit" value="Go">
+</form>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+
+<!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script>window.jQuery || document.write('<script src="../static/slidedeck/jquery-1.7.min.js"><\/script>')</script>
+
+<!-- Deck Core and extensions -->
+<script src="../slidedeck/core/deck.core.js"></script>
+<script src="../slidedeck/extensions/hash/deck.hash.js"></script>
+<script src="../slidedeck/extensions/menu/deck.menu.js"></script>
+<script src="../slidedeck/extensions/goto/deck.goto.js"></script>
+<script src="../slidedeck/extensions/status/deck.status.js"></script>
+<script src="../slidedeck/extensions/navigation/deck.navigation.js"></script>
+
+<!-- Initialize the deck -->
+<script>
+    $(function() {
+        $.deck('.slide');
+    });
+</script>
+
+</body>
+</html>
