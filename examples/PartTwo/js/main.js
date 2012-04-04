@@ -12,6 +12,9 @@ require.config({
 
 require([
             'router',
+            'order!libs/jquery/jquery-1.7.1.min',
+            'order!libs/underscore/underscore-min',
+            'order!libs/backbone/backbone-min'
         ], function(Router){
     Router.initialize();
 });
