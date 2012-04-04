@@ -1,0 +1,18 @@
+<table class="register-list">
+    <tr>
+        <th class="transactions">Transaction</th>
+        <th>Date</th>
+        <th>Credit</th>
+        <th>Debit</th>
+        <th>Balance</th>
+    </tr>
+    <% _.each(RegisterItems, function(i){ %>
+    <tr>
+        <td><%= i.merchant %></td>
+        <td><%= i.date.toDateString() %></td>
+        <td><% if(i.amount > 0) { %> <%=i.amount %> <%} else {%> - <%}%></td>
+        <td><% if(i.amount < 0) { %> <%=i.amount %> <%} else {%> - <%}%></td>
+        <td><%= i.balance %></td>
+    </tr>
+    <%}); %>
+</table>
