@@ -22,6 +22,7 @@ function ($, _, Backbone, EntryView, RegisterItem) {
                     balance: 99},
                 {
                     error: function(model, error){
+                        console.log(error);
                         alert(error);
                     },
                     success: function(model){
