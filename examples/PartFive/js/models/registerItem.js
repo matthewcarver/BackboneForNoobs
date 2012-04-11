@@ -8,7 +8,7 @@ var model =  Backbone.Model.extend({
         amount: -1000000,
         balance: 9999999
     },
-    url: '/BackboneForNoobs/item',
+    url: '/BackboneForNoobs/item.json',
     validate:function(attrs){
         var valid = true;
         var messages = '';
