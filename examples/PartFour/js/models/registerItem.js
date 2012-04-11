@@ -7,7 +7,7 @@ define(['backbone'], function(Backbone){
                                                  amount: -1000000,
                                                  balance: 9999999
                                              },
-                                             url: '/item'
+                                             url: '/BackboneForNoobs/item.json'
                                          });
 
     return model;
