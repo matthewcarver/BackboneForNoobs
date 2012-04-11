@@ -22,8 +22,13 @@ function ($, _, Backbone, EntryView, RegisterItem) {
                     balance: 99},
                 {
                     error: function(model, error){
-                        console.log(error);
-                        alert(error);
+                        // this is to make it seem to work with gh-pages
+                        // in a normal circumstance this would not be needed
+                        if(error.status === 405){
+                           thisModel.add(model)
+                           return;
+                        }
+                        alert(error.statusText);
                     },
                     success: function(model){
                         thisModel.add(model);
