@@ -1,7 +1,7 @@
 define(['backbone', 'models/registerItem', 'underscore'],function(Backbone, RegisterItem, _){
     var collection = Backbone.Collection.extend({
                                                     model: RegisterItem,
-                                                    url: '/BackboneForNoobs/registeritems',
+                                                    url: '/BackboneForNoobs/registeritems.json',
                                                     balancedAndSorted:function(){
                                                         var unsortedModel = this.mappedItems();
 
